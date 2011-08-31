@@ -1,0 +1,126 @@
+@CHARSET "ISO-8859-1";
+ul
+{
+list-style-type:none;
+margin:0;
+padding:0;
+overflow:hidden;
+}
+li
+{
+float:left;
+display:inline;
+}
+a:link,a:visited {color:#900B09; background-color:transparent;}
+a:hover,a:active {color:#FF0000; background-color:transparent}
+a.topnav:link,a.topnav:visited {color:#555555;text-decoration:none;}
+a.topnav:hover,a.topnav:active {color:#ff4800;text-decoration:none;}
+#footer a:link,#footer a:visited {text-decoration:none;color:#404040;background-color:transparent}
+#footer a:hover,#footer a:active {text-decoration:underline;color:#404040;background-color:transparent}
+
+body
+{
+font-size:12px;
+color:#000000;
+background-color:#ffffff;
+margin:0px;
+overflow:auto;
+background-image:url('images/gradientfromtop.gif');
+background-repeat:repeat-x;
+}
+body,p,h1,h2,h3,h4,table,td,th,ul,ol,textarea,input
+{
+font-family:verdana,helvetica,arial,sans-serif;
+}
+
+h1.serif
+{
+font-family:"Times New Roman",Times,serif;
+}
+h1.sansserif
+{
+font-family:Arial,Helvetica,sans-serif;
+}
+p.serif
+{
+font-family:"Times New Roman",Times,serif;
+}
+p.sansserif
+{
+font-family:Arial,Helvetica,sans-serif;
+}
+#datasets
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+/*width:100%;*/
+/*border-collapse:collapse;*/
+}
+#datasets td, #datasets th 
+{
+font-size:1em;
+border:1px solid #98bf21;
+padding:3px 7px 2px 7px;
+}
+#datasets th 
+{
+font-size:1.1em;
+text-align:left;
+padding-top:5px;
+padding-bottom:4px;
+background-color:#fab41e;
+color:#ffffff;
+}
+#datasets tr.alt td 
+{
+color:#000000;
+background-color:#EAF2D3;
+}
+#topnav
+{
+margin:0px;
+/*background-color:#eeeeee;*/
+background-color:#fab41e;
+margin-top:5px;
+margin-bottom:10px;
+padding-top:3px;
+padding-bottom:3px;	
+background-image:url('images/topnav_bg.gif');
+background-position:bottom;
+background-repeat:repeat-x;
+}
+#footer
+{
+margin:0px;
+padding:20px;padding-top:7px;padding-bottom:0px;
+/*color:#909090;background-color:transparent;*/
+color:#fab41e;background-color:transparent;
+font-size:90%;
+background-image:url('images/gradientbottom.jpg');
+background-repeat:repeat-x;
+}
+#overlay2
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+/*width:100%;*/
+/*border-collapse:collapse;*/
+}
+#overlay2 td, #datasets th 
+{
+font-size:1em;
+border:1px solid #98bf21;
+padding:3px 7px 2px 7px;
+}
+#overlay2 th 
+{
+font-size:1.1em;
+text-align:left;
+padding-top:5px;
+padding-bottom:4px;
+background-color:#fab41e;
+color:#ffffff;
+}
+#overlay2 tr.alt td 
+{
+color:#000000;
+background-color:#EAF2D3;
+}

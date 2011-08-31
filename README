@@ -1,0 +1,103 @@
+CTCTWebApplication README
+
+1. What is this app?
+CTCTWebApplication is a Java web app that demonstrates basic Constant Contact
+functionality. Constant Contact is an email marketing tool used by small
+businesses. 
+
+2. How do I build it?
+OK, so I don't use Maven. And you can't make me. I do however use Eclipse, so 
+here's what you need to build the app in Eclipse.
+
+- First, download the source code and import it into an eclipse project (a
+Dynamic Web Project will be sufficient).
+
+- Locate the following jar files on your system (or download them if you
+don't have them):
+scribe-1.1.1.jar - Make sure you are using a relatively recent version
+that has my Constant Contact changes. See https://github.com/fernandezpablo85/scribe-java
+antlr-2.7.6.jar
+commons-collections-3.1.jar
+dom4j-1.6.1.jar
+javassist-3.12.0.GA.jar
+jta-1.1.jar
+slf4j-api-1.6.1.jar
+slf4j-simple-1.6.1.jar
+hibernate3.jar
+jdom.jar
+
+You will also need the SQL Server JDBC driver if you choose to use the default
+database that this version of the app supports. This is available from Microsoft - just
+search google for "sql server jdbc driver download" and you'll find it. Install it.
+You'll need to put the jar file somewhere where you web container can find it also, typically
+in a 'lib' or 'common' directory in your Tomcat, Glassfish, whatever install.
+
+- The app also requires the HttpServlet classes. I use the tried and true javax
+versions, but you should get this for free from Eclipse when using a Dynamic
+Web Project.
+
+- Update your build path to include the above jar files. It should build.
+
+3. How do I run the app?
+There are a number of configuration tasks you need to perform in order to run
+the application.
+- Database configuration. The app uses a SQL database (really just one table)
+to store OAuth tokens for each user who has authenticated to the app. In the
+current version, I used SQLEXPRESS, mostly becuase I had recently done other
+projects using SQLEXPRESS and it was the fast path. You will need to create
+the database and the table. To do this, run the SQLEXPRESS commandline as follows:
+
+sqlcmd -S host\instance -U username -P password -f createdb.db
+
+This creates the database. Then run it again to create the table that stores
+the access tokens:
+
+sqlcmd -S host\instance -U username -P password -f createtbl.tbl
+
+- Hibernate configuration
+Once the database is created, you need to configure Hibernate to use it. In
+the 'src' directory of the code tree you will find 3 hibernate config files:
+
+hibernate.reveng.xml - you don't need to do anything with this. It is used for
+reverse engineering the database and generating Hibernate classes. I have done
+that for you.
+
+hibernate.cfg.xml - if you use SQLEXPRESS and its JDBC driver, there is also
+nothing you need to do with this file. If you decide to use another database,
+this is where you will need to tell hibernate what driver you are using.
+
+hibernate.properties - this stores the connection string and credentials for
+connecting to the database. You'll need to plug in the values for your instance
+of SQLEXPRESS or whatever database you have chosen.
+
+- API configuration
+Constant Contact like most modern REST APIs uses an API key and consumer
+secret to identify your application. If you want to use the app against 
+Constant Contact, you will need to go to http://developer.constantcontact.com
+and request your API key. Just sign up for the free trial on their main
+site and then go over to the developer site to get your key. Once you have
+it, there is a file in 'src/com/ballc/gasuite' called apikey.properties.
+Enter your key and secret values there, and then place the file in a location
+where the java classes can load it from. This varies a bit - on Glassfish it
+is place in the 'config' directory under your domain.
+
+- Deploy the app.
+Depending on your J2EE container, this might vary. For my development work,
+I used Glassfish from Oracle (the open source version) and ran it directly
+out of Eclipse, which makes for easy code-deploy-test cycles. For most 
+containers there is a deploy tool, or for really simple tests, you can do a
+'drop and deploy' by just dropping a war or ear file built from the source
+into the deploy directory.
+
+4. What does the app do?
+It was really designed to help me get familiar with the Constant
+Contact REST APIs, so the functionality is fairly simple - read some
+mailing lists, read the contacts on the list, add someone to a list.
+
+The most useful piece, one that I could not find anywhere else, is the
+OAuth web flow piece. If you stripped out all the Constant Contact
+specific stuff, and just kept the database, hibernate and the two OAuth
+related servlets (AuthServet and OAuthCallbackServlet) you have the
+core infrastructure needed to "OAuth-enable" a website. With a production
+quality database, there is no reason why this implementation would not
+scale to be useful in commercial applications. 

@@ -1,0 +1,22 @@
+USE oauth;
+GO
+
+IF EXISTS (SELECT name FROM sys.tables WHERE name = N'oauth_token')
+   DROP TABLE access_token;
+GO
+
+CREATE TABLE access_token
+(
+access_tokenID BIGINT IDENTITY(1,1),
+loginName VARCHAR(32) NOT NULL,
+accessToken VARCHAR(64) NOT NULL,
+secret VARCHAR(64) NOT NULL,
+modifiedDate DATETIME NOT NULL CONSTRAINT [DF_oauth_token_modifiedDate] DEFAULT (getdate()),
+CONSTRAINT [PK_oauth_token] PRIMARY KEY ([loginName])
+)
+ON [PRIMARY];
+GO
+
+
+
+

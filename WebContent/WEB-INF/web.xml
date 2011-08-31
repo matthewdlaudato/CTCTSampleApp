@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>CTCTWeb</display-name>
+  <welcome-file-list>
+    <welcome-file>lister.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>MailingListServlet</servlet-name>
+    <servlet-class>com.ballc.gasuite.MailingListServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MailingListServlet</servlet-name>
+    <url-pattern>/MailingListServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ContactServlet</servlet-name>
+    <servlet-class>com.ballc.gasuite.ContactServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ContactServlet</servlet-name>
+    <url-pattern>/ContactServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OAuthCallbackServlet</servlet-name>
+    <servlet-class>com.ballc.gasuite.OAuthCallbackServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OAuthCallbackServlet</servlet-name>
+    <url-pattern>/OAuthCallbackServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AuthServlet</servlet-name>
+    <servlet-class>com.ballc.gasuite.AuthServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/AuthServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActivityServlet</servlet-name>
+    <servlet-class>com.ballc.gasuite.ActivityServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActivityServlet</servlet-name>
+    <url-pattern>/ActivityServlet.do</url-pattern>
+  </servlet-mapping>
+ 
+</web-app>

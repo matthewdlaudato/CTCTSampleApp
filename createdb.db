@@ -1,0 +1,5 @@
+IF DB_ID (N'oauth') IS NOT NULL
+DROP DATABASE oauth;
+GO
+CREATE DATABASE oauth;
+GO

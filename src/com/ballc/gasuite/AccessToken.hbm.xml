@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 14, 2011 11:38:01 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ballc.gasuite.AccessToken" table="access_token" schema="dbo" catalog="oauth">
+        <id name="accessTokenId" type="long">
+            <column name="access_tokenID" not-null="true" />
+            <generator class="identity" />
+        </id>
+        <property name="loginName" type="string">
+            <column name="loginName" length="32" />
+        </property>
+        <property name="accessToken" type="string">
+            <column name="accessToken" length="64" not-null="true" />
+        </property>
+        <property name="secret" type="string">
+            <column name="secret" length="64" not-null="true" />
+        </property>
+        <property name="modifiedDate" type="timestamp">
+            <column name="modifiedDate" length="23" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

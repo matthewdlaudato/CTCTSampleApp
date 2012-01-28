@@ -1,27 +1,21 @@
-package com.ballc.gasuite;  
+package com.ballc.gasuite;
 
-
-import java.util.Properties;
 import java.io.FileInputStream;
+import java.util.Properties;
 
-import javax.servlet.http.HttpSession;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpServletResponse;  
+import javax.servlet.http.HttpSession;
 
-import org.scribe.builder.ServiceBuilder;
-import org.scribe.builder.api.ConstantContactApi;
 import org.scribe.model.Token;
-import org.scribe.oauth.OAuthService;
 
-public class AuthServlet extends HttpServlet {  
+import com.ballc.gasuite.CTCTApi;
 
-	/**  
-	 * Servlet to initiate the OAuth authentication flow  
-	 */ 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException {  
+public class OAuth2Servlet extends HttpServlet {
 
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException {
 		HttpSession httpsession = req.getSession(true);
 		String username = req.getParameter("username");
 
@@ -38,30 +32,17 @@ public class AuthServlet extends HttpServlet {
 		
 		// Check for an existing valid access token
 		Token accessToken = CTCTApi._loadAccessToken(username);
-		
 		if (accessToken == null) {
-			OAuthService service = new ServiceBuilder()
-	        .provider(ConstantContactApi.class)
-	        .callback("http://localhost:8080/CTCTWeb/OAuthCallbackServlet.do")
-	        .apiKey(apiKeyProperties.getProperty("apiKey"))
-	        .apiSecret(apiKeyProperties.getProperty("apiSecret"))
-	        .build();
-			httpsession.setAttribute("oauth.service", service);
 			
-			Token requestToken = service.getRequestToken();
-			httpsession.setAttribute("oauth.request_token_secret", requestToken.getSecret());
-			
-			String confirmAccessURL = service.getAuthorizationUrl(requestToken);
-	
-			System.out.println(confirmAccessURL);
-			try {
-				res.sendRedirect(res.encodeRedirectURL(confirmAccessURL));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		} else {
+			// connect to the auth URL
+			String authURL = res.encodeRedirectURL("https://oauth2.constantcontact.com/oauth2/oauth/siteowner/authorize" +
+					"?response_type=code" +
+					"&client_id=" + apiKeyProperties.getProperty("iaapiKey") +
+					"&redirect_uri=http://localhost:8080/CTCTWeb/OAuth2CallbackServlet.do");
+
+			res.sendRedirect(authURL);
+		}  else {
 			httpsession.setAttribute("username", username);
-			httpsession.setAttribute("oauth.access_token", accessToken);
 			CTCTApi lister = new CTCTApi(
 					username,
 					accessToken, 
@@ -71,11 +52,12 @@ public class AuthServlet extends HttpServlet {
 			httpsession.setAttribute("ctctapi", lister);
 			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister.jsp");
 			res.sendRedirect(destinationURL);
-
 		}
-	  }
- 
+		
+	}
+	
   	public void doGet(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException {  
   		doPost(req, res);  
   	}
+
 }

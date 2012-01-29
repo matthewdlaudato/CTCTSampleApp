@@ -5,7 +5,6 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- 		<script type="text/javascript" language="javascript" src="jquery-1.5.2.js"></script> -->
 		<script type="text/javascript" language="javascript" src="development-bundle/jquery-1.6.2.js"></script>
 		<script type="text/javascript" language="javascript" src="development-bundle/ui/jquery-ui-1.8.16.custom.js"></script>
 		<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
@@ -13,7 +12,6 @@
 		<link rel=StyleSheet href="css/style.css" type="text/css" media=all>
 		<script type="text/javascript" language="javascript" src="js/nicetitle.js"></script>
 		<link rel=StyleSheet href="css/nicetitle.css" type="text/css" media=all>
-<!-- 		<script type="text/javascript" language="javascript" src="overlib.js"></script> -->
 		
 		<title>CTCTWeb - Integration Platform Demo Site</title>
 	</head>
@@ -47,12 +45,21 @@
 		<h1 class="sansserif">CTCTWeb - Integration Platform Demo Site</h1>
 		<br>
 		<form name="mainForm" id="mainForm">
-			<h2 class="sansserif">Login</h2>
+			<h2 class="sansserif">Login - OAuth 1.0a</h2>
 			<table id="topnav" width="960" border="0" cellpadding="0" cellspacing="3">
 				<tr><td>Login</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 				<tr>
 				<td><input type="text" name="loginname" id="loginname"></td>
 				<td><div id="loga"><button type="button" onclick="authenticate(this.form.loginname.value); return false;">Authenticate</button></div></td>
+				</tr>
+			</table>
+			<br>
+			<h2 class="sansserif">Login - OAuth 2.0</h2>
+			<table id="topnav" width="960" border="0" cellpadding="0" cellspacing="3">
+				<tr><td>Login</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr>
+				<td><input type="text" name="loginname2" id="loginname2"></td>
+				<td><div id="loga2"><button type="button" onclick="authenticate2(this.form.loginname2.value); return false;">Authenticate</button></div></td>
 				</tr>
 			</table>
 			<br>

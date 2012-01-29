@@ -142,6 +142,11 @@ function authenticate(loginname) {
 	makeAuthRequest("AuthServlet.do", poststr, "GET");
 }
 
+function authenticate2(loginname) {
+	var poststr = {'username':loginname};
+	makeAuthRequest("OAuth2Servlet.do", poststr, "GET");
+}
+
 function addContactActivity() {
 	var poststr =  null;
 
@@ -216,22 +221,7 @@ function windowLoadHandler() {
 	}
 }
 
-//run a stack of load event functions
-function addLoadEvent(func) {
-	  var oldonload = window.onload;
-	  if (typeof window.onload != 'function') {
-	    window.onload = func;
-	  } else {
-	    window.onload = function() {
-	      if (oldonload) {
-	        oldonload();
-	      }
-	      func();
-	    };
-	  }
-}
-
-addLoadEvent(function() {
+jQuery(window).load(function() {
 	jQuery('#overlayDialog').dialog({ autoOpen: false, title: 'Contact Information'});
 });
-addLoadEvent(windowLoadHandler);
+jQuery(window).load(windowLoadHandler);

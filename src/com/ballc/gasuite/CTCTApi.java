@@ -13,6 +13,7 @@ import java.util.Hashtable;
 
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.ConstantContactApi;
+import org.scribe.builder.api.ConstantContactApi2;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Token;
@@ -50,7 +51,7 @@ public class CTCTApi {
 		}
 
 		_service = new ServiceBuilder()
-        .provider(ConstantContactApi.class)
+        .provider(ConstantContactApi2.class)
         .apiKey(apiKey)
         .apiSecret(apiSecret)
         .build();
@@ -149,10 +150,8 @@ public class CTCTApi {
       	 } catch(JDOMException jdomex) {
       		System.out.println(jdomex.getMessage());
       	 }
-
 	    
 		return contacts;
-		
 		
 	}
 	
@@ -466,7 +465,6 @@ public class CTCTApi {
       	 } catch(Exception ex) {
       		System.out.println(ex.getMessage());
       	 } 
-
 
    	    return emailCampaigns;
 

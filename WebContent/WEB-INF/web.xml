@@ -41,6 +41,24 @@
     <url-pattern>/AuthServlet.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>OAuth2CallbackServlet</servlet-name>
+    <servlet-class>com.ballc.gasuite.OAuth2CallbackServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OAuth2CallbackServlet</servlet-name>
+    <url-pattern>/OAuth2CallbackServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OAuth2Servlet</servlet-name>
+    <servlet-class>com.ballc.gasuite.OAuth2Servlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OAuth2Servlet</servlet-name>
+    <url-pattern>/OAuth2Servlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ActivityServlet</servlet-name>
     <servlet-class>com.ballc.gasuite.ActivityServlet</servlet-class>
     <load-on-startup>1</load-on-startup>

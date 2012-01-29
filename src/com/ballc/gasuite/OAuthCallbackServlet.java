@@ -69,17 +69,16 @@ public class OAuthCallbackServlet extends HttpServlet {
 
 			httpsession.setAttribute("oauth.request_token", null);
 			ServletContext servletContext = req.getServletContext();
-			Properties apiKeyProperties = (Properties) servletContext.getAttribute("apiKeyProperties");
+			Properties applicationProperties = (Properties) servletContext.getAttribute("applicationProperties");
 			CTCTApi lister = new CTCTApi(
 					username,
 					accessToken, 
-					apiKeyProperties.getProperty("apiKey"),
-					apiKeyProperties.getProperty("apiSecret")
+					applicationProperties.getProperty("apiKey"),
+					applicationProperties.getProperty("apiSecret")
 					);
 			httpsession.setAttribute("ctctapi", lister);
 			  
-//			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister_innovation.jsp"); 
-			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTSampleApp/lister.jsp"); 
+			String destinationURL = res.encodeRedirectURL(applicationProperties.getProperty("landingPageURI")); 
 			res.sendRedirect(destinationURL);
 	  }
   }

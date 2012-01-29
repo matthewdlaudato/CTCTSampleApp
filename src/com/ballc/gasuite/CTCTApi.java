@@ -51,7 +51,7 @@ public class CTCTApi {
 		}
 
 		_service = new ServiceBuilder()
-        .provider(ConstantContactApi2.class)
+        .provider(ConstantContactApi.class)
         .apiKey(apiKey)
         .apiSecret(apiSecret)
         .build();

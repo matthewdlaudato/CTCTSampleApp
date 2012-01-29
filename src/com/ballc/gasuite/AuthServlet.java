@@ -27,13 +27,13 @@ public class AuthServlet extends HttpServlet {
 
 		// Get the api key properties
 		ServletContext servletContext = req.getServletContext();
-		Properties apiKeyProperties = (Properties) servletContext.getAttribute("apiKeyProperties");
-		if (apiKeyProperties == null) {
-			apiKeyProperties = new Properties();
-			FileInputStream in = new FileInputStream("apikey.properties");
-			apiKeyProperties.load(in);
+		Properties applicationProperties = (Properties) servletContext.getAttribute("applicationProperties");
+		if (applicationProperties == null) {
+			applicationProperties = new Properties();
+			FileInputStream in = new FileInputStream("local_application.properties");
+			applicationProperties.load(in);
 			in.close();
-			servletContext.setAttribute("apiKeyProperties", apiKeyProperties);
+			servletContext.setAttribute("applicationProperties", applicationProperties);
 		}
 		
 		// Check for an existing valid access token
@@ -42,9 +42,9 @@ public class AuthServlet extends HttpServlet {
 		if (accessToken == null) {
 			OAuthService service = new ServiceBuilder()
 	        .provider(ConstantContactApi.class)
-	        .callback("http://localhost:8080/CTCTSampleApp/OAuthCallbackServlet.do")
-	        .apiKey(apiKeyProperties.getProperty("apiKey"))
-	        .apiSecret(apiKeyProperties.getProperty("apiSecret"))
+	        .callback(applicationProperties.getProperty("oauth1CallbackURI"))
+	        .apiKey(applicationProperties.getProperty("apiKey"))
+	        .apiSecret(applicationProperties.getProperty("apiSecret"))
 	        .build();
 			httpsession.setAttribute("oauth.service", service);
 			
@@ -65,11 +65,11 @@ public class AuthServlet extends HttpServlet {
 			CTCTApi lister = new CTCTApi(
 					username,
 					accessToken, 
-					apiKeyProperties.getProperty("apiKey"),
-					apiKeyProperties.getProperty("apiSecret")
+					applicationProperties.getProperty("apiKey"),
+					applicationProperties.getProperty("apiSecret")
 					);
 			httpsession.setAttribute("ctctapi", lister);
-			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTSampleApp/lister.jsp");
+			String destinationURL = res.encodeRedirectURL(applicationProperties.getProperty("landingPageURI"));
 			res.sendRedirect(destinationURL);
 
 		}

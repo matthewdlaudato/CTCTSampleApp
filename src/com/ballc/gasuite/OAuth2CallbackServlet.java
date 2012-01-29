@@ -41,15 +41,15 @@ public class OAuth2CallbackServlet extends HttpServlet {
 
 		// connect to the token request URL
 		ServletContext servletContext = req.getServletContext();
-		Properties apiKeyProperties = (Properties) servletContext.getAttribute("apiKeyProperties");
+		Properties applicationProperties = (Properties) servletContext.getAttribute("applicationProperties");
 
 		if (code != null) { // we are making the initial token request
 			String tokenURL = "https://oauth2.constantcontact.com/oauth2/oauth/token"; 
 			String tokenURLdata = "grant_type=authorization_code" + 
-					"&client_id=" + apiKeyProperties.getProperty("iaapiKey") +
-					"&client_secret=" + apiKeyProperties.getProperty("iaapiSecret") +
+					"&client_id=" + applicationProperties.getProperty("apiKey") +
+					"&client_secret=" + applicationProperties.getProperty("apiSecret") +
 					"&code=" + code +
-					"&redirect_uri=" + "http://localhost:8080/CTCTWeb/OAuth2CallbackServlet.do";
+					"&redirect_uri=" + applicationProperties.getProperty("oauth2RedirectURI");
 			
 			URL url = new URL(tokenURL);
 			String jsonToken = "";
@@ -98,7 +98,7 @@ public class OAuth2CallbackServlet extends HttpServlet {
 			AccessToken at = new AccessToken();
 			at.setLoginName(username);
 			at.setAccessToken(access_token);
-			at.setSecret(apiKeyProperties.getProperty("iaapiSecret"));
+			at.setSecret(applicationProperties.getProperty("apiSecret"));
 			Date dt = new Date();
 			Timestamp ts = new Timestamp(dt.getTime());
 			at.setModifiedDate(ts);
@@ -117,16 +117,16 @@ public class OAuth2CallbackServlet extends HttpServlet {
 				session.close(); 
 			} 
 
-			Token t = new Token(access_token, apiKeyProperties.getProperty("iaapiSecret"));
+			Token t = new Token(access_token, applicationProperties.getProperty("apiSecret"));
 			CTCTApi lister = new CTCTApi(
 					username,
 					t, 
-					apiKeyProperties.getProperty("apiKey"),
-					apiKeyProperties.getProperty("apiSecret")
+					applicationProperties.getProperty("apiKey"),
+					applicationProperties.getProperty("apiSecret")
 					);
 			httpsession.setAttribute("ctctapi", lister);
 			  
-			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister.jsp"); 
+			String destinationURL = res.encodeRedirectURL(applicationProperties.getProperty("landingPageURI")); 
 			res.sendRedirect(destinationURL);
 		}
 		

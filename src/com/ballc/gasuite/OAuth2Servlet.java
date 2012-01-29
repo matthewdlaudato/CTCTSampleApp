@@ -21,13 +21,13 @@ public class OAuth2Servlet extends HttpServlet {
 
 		// Get the api key properties
 		ServletContext servletContext = req.getServletContext();
-		Properties apiKeyProperties = (Properties) servletContext.getAttribute("apiKeyProperties");
-		if (apiKeyProperties == null) {
-			apiKeyProperties = new Properties();
-			FileInputStream in = new FileInputStream("apikey.properties");
-			apiKeyProperties.load(in);
+		Properties applicationProperties = (Properties) servletContext.getAttribute("applicationProperties");
+		if (applicationProperties == null) {
+			applicationProperties = new Properties();
+			FileInputStream in = new FileInputStream("local_application.properties");
+			applicationProperties.load(in);
 			in.close();
-			servletContext.setAttribute("apiKeyProperties", apiKeyProperties);
+			servletContext.setAttribute("applicationProperties", applicationProperties);
 		}
 		
 		// Check for an existing valid access token
@@ -37,8 +37,8 @@ public class OAuth2Servlet extends HttpServlet {
 			// connect to the auth URL
 			String authURL = res.encodeRedirectURL("https://oauth2.constantcontact.com/oauth2/oauth/siteowner/authorize" +
 					"?response_type=code" +
-					"&client_id=" + apiKeyProperties.getProperty("iaapiKey") +
-					"&redirect_uri=http://localhost:8080/CTCTWeb/OAuth2CallbackServlet.do");
+					"&client_id=" + applicationProperties.getProperty("apiKey") +
+					"&redirect_uri=" + applicationProperties.getProperty("oauth2RedirectURI"));
 
 			res.sendRedirect(authURL);
 		}  else {
@@ -46,11 +46,11 @@ public class OAuth2Servlet extends HttpServlet {
 			CTCTApi lister = new CTCTApi(
 					username,
 					accessToken, 
-					apiKeyProperties.getProperty("apiKey"),
-					apiKeyProperties.getProperty("apiSecret")
+					applicationProperties.getProperty("iaapiKey"),
+					applicationProperties.getProperty("iaapiSecret")
 					);
 			httpsession.setAttribute("ctctapi", lister);
-			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister.jsp");
+			String destinationURL = res.encodeRedirectURL(applicationProperties.getProperty("landingPageURI"));
 			res.sendRedirect(destinationURL);
 		}
 		

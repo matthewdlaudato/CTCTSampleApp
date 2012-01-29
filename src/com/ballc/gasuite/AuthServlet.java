@@ -66,7 +66,8 @@ public class AuthServlet extends HttpServlet {
 					username,
 					accessToken, 
 					applicationProperties.getProperty("apiKey"),
-					applicationProperties.getProperty("apiSecret")
+					applicationProperties.getProperty("apiSecret"),
+					1
 					);
 			httpsession.setAttribute("ctctapi", lister);
 			String destinationURL = res.encodeRedirectURL(applicationProperties.getProperty("landingPageURI"));

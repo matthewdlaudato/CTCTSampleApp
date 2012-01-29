@@ -46,8 +46,8 @@ public class OAuth2CallbackServlet extends HttpServlet {
 		if (code != null) { // we are making the initial token request
 			String tokenURL = "https://oauth2.constantcontact.com/oauth2/oauth/token"; 
 			String tokenURLdata = "grant_type=authorization_code" + 
-					"&client_id=" + applicationProperties.getProperty("apiKey") +
-					"&client_secret=" + applicationProperties.getProperty("apiSecret") +
+					"&client_id=" + applicationProperties.getProperty("iaapiKey") +
+					"&client_secret=" + applicationProperties.getProperty("iaapiSecret") +
 					"&code=" + code +
 					"&redirect_uri=" + applicationProperties.getProperty("oauth2RedirectURI");
 			
@@ -98,7 +98,7 @@ public class OAuth2CallbackServlet extends HttpServlet {
 			AccessToken at = new AccessToken();
 			at.setLoginName(username);
 			at.setAccessToken(access_token);
-			at.setSecret(applicationProperties.getProperty("apiSecret"));
+			at.setSecret(applicationProperties.getProperty("iaapiSecret"));
 			Date dt = new Date();
 			Timestamp ts = new Timestamp(dt.getTime());
 			at.setModifiedDate(ts);
@@ -117,12 +117,13 @@ public class OAuth2CallbackServlet extends HttpServlet {
 				session.close(); 
 			} 
 
-			Token t = new Token(access_token, applicationProperties.getProperty("apiSecret"));
+			Token t = new Token(access_token, applicationProperties.getProperty("iaapiSecret"));
 			CTCTApi lister = new CTCTApi(
 					username,
 					t, 
-					applicationProperties.getProperty("apiKey"),
-					applicationProperties.getProperty("apiSecret")
+					applicationProperties.getProperty("iaapiKey"),
+					applicationProperties.getProperty("iaapiSecret"),
+					2
 					);
 			httpsession.setAttribute("ctctapi", lister);
 			  

@@ -74,7 +74,8 @@ public class OAuthCallbackServlet extends HttpServlet {
 					username,
 					accessToken, 
 					applicationProperties.getProperty("apiKey"),
-					applicationProperties.getProperty("apiSecret")
+					applicationProperties.getProperty("apiSecret"),
+					1
 					);
 			httpsession.setAttribute("ctctapi", lister);
 			  

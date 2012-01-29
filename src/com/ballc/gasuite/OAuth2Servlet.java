@@ -37,7 +37,7 @@ public class OAuth2Servlet extends HttpServlet {
 			// connect to the auth URL
 			String authURL = res.encodeRedirectURL("https://oauth2.constantcontact.com/oauth2/oauth/siteowner/authorize" +
 					"?response_type=code" +
-					"&client_id=" + applicationProperties.getProperty("apiKey") +
+					"&client_id=" + applicationProperties.getProperty("iaapiKey") +
 					"&redirect_uri=" + applicationProperties.getProperty("oauth2RedirectURI"));
 
 			res.sendRedirect(authURL);
@@ -47,7 +47,8 @@ public class OAuth2Servlet extends HttpServlet {
 					username,
 					accessToken, 
 					applicationProperties.getProperty("iaapiKey"),
-					applicationProperties.getProperty("iaapiSecret")
+					applicationProperties.getProperty("iaapiSecret"),
+					2
 					);
 			httpsession.setAttribute("ctctapi", lister);
 			String destinationURL = res.encodeRedirectURL(applicationProperties.getProperty("landingPageURI"));

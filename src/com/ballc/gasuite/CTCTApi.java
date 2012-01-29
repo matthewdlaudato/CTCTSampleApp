@@ -41,6 +41,22 @@ public class CTCTApi {
     private Namespace _ns = Namespace.getNamespace("http://ws.constantcontact.com/ns/1.0/");
 	private Namespace _ens = Namespace.getNamespace("http://www.w3.org/2005/Atom");
 
+	public CTCTApi(String username, Token token, String apiKey, String apiSecret, int oauthVersion){
+		_userName = username;
+		
+		if (token == null) {
+			_loadAccessToken(username);
+		} else {
+			_accessToken = token;
+		}
+
+		_service = new ServiceBuilder()
+        .provider(oauthVersion == 1 ? ConstantContactApi.class : ConstantContactApi2.class)
+        .apiKey(apiKey)
+        .apiSecret(apiSecret)
+        .build();		
+	}
+	
 	public CTCTApi(String username, Token token, String apiKey, String apiSecret){
 		_userName = username;
 		
@@ -51,7 +67,7 @@ public class CTCTApi {
 		}
 
 		_service = new ServiceBuilder()
-        .provider(ConstantContactApi.class)
+        .provider(ConstantContactApi2.class)
         .apiKey(apiKey)
         .apiSecret(apiSecret)
         .build();

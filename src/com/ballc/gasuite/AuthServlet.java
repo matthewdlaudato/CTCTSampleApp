@@ -42,7 +42,7 @@ public class AuthServlet extends HttpServlet {
 		if (accessToken == null) {
 			OAuthService service = new ServiceBuilder()
 	        .provider(ConstantContactApi.class)
-	        .callback("http://localhost:8080/CTCTWeb/OAuthCallbackServlet.do")
+	        .callback("http://localhost:8080/CTCTSampleApp/OAuthCallbackServlet.do")
 	        .apiKey(apiKeyProperties.getProperty("apiKey"))
 	        .apiSecret(apiKeyProperties.getProperty("apiSecret"))
 	        .build();
@@ -70,7 +70,7 @@ public class AuthServlet extends HttpServlet {
 					);
 			httpsession.setAttribute("ctctapi", lister);
 //			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister_innovation.jsp");
-			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister.jsp");
+			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTSampleApp/lister.jsp");
 			res.sendRedirect(destinationURL);
 
 		}

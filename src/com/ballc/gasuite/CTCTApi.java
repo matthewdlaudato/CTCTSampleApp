@@ -57,17 +57,18 @@ public class CTCTApi {
 	}
 	
 	
-	public Hashtable getMailingLists() {
+	public Hashtable<String, String> getMailingLists() {
 		
 	    // List the lists
 		String serviceURI = "https://api.constantcontact.com/ws/customers/" + _userName + "/lists";
-	    Hashtable uriList = getListURIs(_accessToken, _service, serviceURI);
+//		System.out.println("DEBUG (CTCTApi): listUri = " + serviceURI);
+	    Hashtable <String, String> uriList = getListURIs(_accessToken, _service, serviceURI);
 	    return uriList;
 	}
 
-	private Hashtable getListURIs(Token accessToken, OAuthService service, String serviceURI)
+	private Hashtable <String, String> getListURIs(Token accessToken, OAuthService service, String serviceURI)
 	{
-		Hashtable <String, String> mailingLists = new Hashtable();
+		Hashtable <String, String> mailingLists = new Hashtable<String, String>();
 		
 		OAuthRequest listsRequest = new OAuthRequest(Verb.GET, serviceURI);
 	    service.signRequest(accessToken, listsRequest);
@@ -237,7 +238,7 @@ public class CTCTApi {
       	   
       	   Element el = null;
       	   List <Element> allContactLists = ContactLists.getChildren();
-      	   Iterator i = allContactLists.iterator();
+      	   Iterator <Element> i = allContactLists.iterator();
       	   while (i.hasNext()) {
       		   Element e = (Element) i.next();
       		   el = (Element) e.clone();
@@ -531,9 +532,9 @@ public class CTCTApi {
 		}
 		
 		AccessToken at = null;
-		for (Iterator iterator = rt.iterator(); iterator.hasNext();) 
+		for (Iterator <AccessToken> iterator = rt.iterator(); iterator.hasNext();) 
 		{ 
-			 at = (AccessToken) iterator.next();
+			 at = iterator.next();
 		}
 
 		Token accessToken = null;

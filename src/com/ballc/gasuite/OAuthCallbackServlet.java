@@ -79,7 +79,7 @@ public class OAuthCallbackServlet extends HttpServlet {
 			httpsession.setAttribute("ctctapi", lister);
 			  
 //			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister_innovation.jsp"); 
-			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTWeb/lister.jsp"); 
+			String destinationURL = res.encodeRedirectURL("http://localhost:8080/CTCTSampleApp/lister.jsp"); 
 			res.sendRedirect(destinationURL);
 	  }
   }

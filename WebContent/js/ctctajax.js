@@ -23,7 +23,7 @@ function makeAuthRequest(url, parameters, type) {
 
 function listMailingLists() {
 	var options = {
-		url: 'http://localhost:8080/CTCTWeb/MailingListServlet.do',
+		url: 'http://localhost:8080/CTCTSampleApp/MailingListServlet.do',
 		type: "GET",
 		dataType: "html",
 		success: function(data){
@@ -39,7 +39,7 @@ function addContactList(newListName){
     jQuery('.debugArea').html("poststr=" + poststr); 
 
     var options = {
-			url: 'http://localhost:8080/CTCTWeb/MailingListServlet.do',
+			url: 'http://localhost:8080/CTCTSampleApp/MailingListServlet.do',
 			type: "POST",
 			data: poststr,
 			dataType: "html",
@@ -55,7 +55,7 @@ function addNewContact(lastName,firstName,email,list) {
 	var poststr =  encodeURI("lastName=" + lastName) + encodeURI("&firstName=" + firstName) + encodeURI("&email=" + email) + encodeURI("&list=" + list);
     jQuery('.debugArea').html("poststr=" + poststr); 
     var options = {
-			url: 'http://localhost:8080/CTCTWeb/ContactServlet.do',
+			url: 'http://localhost:8080/CTCTSampleApp/ContactServlet.do',
 			type: "POST",
 			data: poststr,
 			dataType: "html",
@@ -72,7 +72,7 @@ function addContactToList(email,list) {
     jQuery('.debugArea').html("poststr=" + poststr); 
 
     var options = {
-			url: 'http://localhost:8080/CTCTWeb/MailingListServlet.do',
+			url: 'http://localhost:8080/CTCTSampleApp/MailingListServlet.do',
 			type: "POST",
 			data: poststr,
 			dataType: "html",
@@ -88,7 +88,7 @@ function getContact(email) {
 	var poststr = encodeURI("email=" + email);
     jQuery('.debugArea').html("poststr=" + poststr); 
     var options = {
-			url: 'http://localhost:8080/CTCTWeb/ContactServlet.do',
+			url: 'http://localhost:8080/CTCTSampleApp/ContactServlet.do',
 			type: "GET",
 			data: poststr,
 			dataType: "html",
@@ -105,7 +105,7 @@ function getContactInOverlay(email) {
 	poststr += encodeURI("&overlay=1");
     jQuery('.debugArea').html("poststr=" + poststr); 
     var options = {
-			url: 'http://localhost:8080/CTCTWeb/ContactServlet.do',
+			url: 'http://localhost:8080/CTCTSampleApp/ContactServlet.do',
 			type: "GET",
 			data: poststr,
 			dataType: "html",
@@ -125,7 +125,7 @@ function getMailingListContacts(list){
     jQuery('.debugArea').html("poststr=" + poststr); 
 
     var options = {
-			url: 'http://localhost:8080/CTCTWeb/MailingListServlet.do',
+			url: 'http://localhost:8080/CTCTSampleApp/MailingListServlet.do',
 			type: "GET",
 			data: poststr,
 			dataType: "html",
@@ -146,7 +146,7 @@ function addContactActivity() {
 	var poststr =  null;
 
     var options = {
-			url: 'http://localhost:8080/CTCTWeb/ActivityServlet.do',
+			url: 'http://localhost:8080/CTCTSampleApp/ActivityServlet.do',
 			type: "POST",
 			data: poststr,
 			dataType: "html",

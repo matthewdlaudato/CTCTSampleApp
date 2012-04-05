@@ -24,7 +24,7 @@ jta-1.1.jar
 slf4j-api-1.6.1.jar
 slf4j-simple-1.6.1.jar
 hibernate3.jar
-jdom.jar
+jdom.jar (version 1.1.1 currently being used)
 
 You will also need the SQL Server JDBC driver if you choose to use the default
 database that this version of the app supports. This is available from Microsoft - just
